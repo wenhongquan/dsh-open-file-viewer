@@ -1,0 +1,19 @@
+# dsh-open-file-viewer bundle patch
+#
+# Installed into a profile with:
+#
+#   dsh plugin --profile web add ./plugins/dsh-open-file-viewer
+#
+# The profile boot merges this as one `insert` of the plugin row, after
+# `dsh-better-sidebar` in `dsh.profile.bundles`. Order matters: this plugin
+# registers a file viewer against the sidebar service, so the sidebar must be
+# mounted first (its own `client.inject` list covers that, but the bundle
+# order is the contract that guarantees it).
+#
+# The `!!js` guard mirrors dsh-better-sidebar's: an aggregate bundle may
+# already mount it under another entry id, and a second mount would register
+# the same viewer twice and throw at boot.
+- insert:
+    - id: dsh-open-file-viewer
+      name: 'dsh-open-file-viewer'
+      disabled: !!js "[...ctx.loader.entries()].some((e) => e.options.name === 'dsh-open-file-viewer' && e.options.id !== 'dsh-open-file-viewer' && !e.disabled)"

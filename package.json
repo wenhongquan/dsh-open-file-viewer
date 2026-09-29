@@ -1,0 +1,59 @@
+{
+  "name": "dsh-open-file-viewer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Open File Viewer preview for DSH — PDF, Office, images, archives, CAD/3D/GIS preview inside the sidebar.",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-client-ui-slots",
+        "@deepseek-ai/dsh-client-ui-sidebar-right"
+      ],
+      "platform": "web"
+    },
+    "manifestVersion": 1
+  },
+  "files": [
+    "lib/client.js",
+    "lib/index.js",
+    "cordis.patch.yml",
+    "icon.svg",
+    "package.json"
+  ],
+  "icon": "icon.svg",
+  "license": "MIT",
+  "dependencies": {
+    "@open-file-viewer/core": "0.1.49",
+    "pdfjs-dist": "^6.3.289"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-client-ui-sidebar-right": "^0.1.7-rc.1",
+    "@deepseek-ai/dsh-client-ui-slots": "^0.1.7-rc.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "@types/react": "^19.3.0",
+    "react": "^18.3.1",
+    "rolldown": "^1.0.0-beta.42",
+    "typescript": "^5.6.0"
+  },
+  "scripts": {
+    "build": "pnpm run gen:assets && rolldown -c rolldown.config.mjs",
+    "verify": "node scripts/verify-bundle.mjs",
+    "check": "pnpm run build && pnpm run verify",
+    "gen:assets": "node scripts/gen-assets.mjs"
+  }
+}

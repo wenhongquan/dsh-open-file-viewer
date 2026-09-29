@@ -1,0 +1,3 @@
+minimumReleaseAgeExclude:
+  - '@open-file-viewer/core@0.1.49'
+  - dsh-better-sidebar@0.22.1

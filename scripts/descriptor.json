@@ -1,0 +1,7 @@
+{
+  "id": "dsh-open-file-viewer:preview",
+  "title": "Open File Viewer",
+  "exts": [],
+  "priority": 50,
+  "fetchStrategy": "mediaUrl"
+}
